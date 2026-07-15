@@ -30,16 +30,16 @@ public class Movie {
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name="update_at")
-    private LocalDateTime updateAt;
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
 
     public Movie(){
 
     }
 
-    public Movie(Long id, LocalDateTime updateAt, Double rating, String description, String title, LocalDate releaseDate, LocalDateTime createdAt) {
+    public Movie(Long id, LocalDateTime updatedAt, Double rating, String description, String title, LocalDate releaseDate, LocalDateTime createdAt) {
         this.id = id;
-        this.updateAt = updateAt;
+        this.updatedAt = updatedAt;
         this.rating = rating;
         this.description = description;
         this.title = title;
@@ -95,11 +95,11 @@ public class Movie {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdateAt() {
-        return updateAt;
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(LocalDateTime updateAt) {
-        this.updateAt = updateAt;
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
