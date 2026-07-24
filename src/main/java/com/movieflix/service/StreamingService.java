@@ -1,16 +1,11 @@
 package com.movieflix.service;
 
-import com.movieflix.dto.request.StreamingRequestDTO;
-import com.movieflix.dto.response.StreamingResponseDTO;
-import com.movieflix.entity.Category;
 import com.movieflix.entity.Streaming;
-import com.movieflix.mapper.StreamingMapper;
 import com.movieflix.repository.StreamingRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StreamingService {
@@ -21,27 +16,28 @@ public class StreamingService {
         this.streamingRepository = streamingRepository;
     }
 
-    public StreamingResponseDTO saveCategory(StreamingRequestDTO streamingRequestDTO){
-        Streaming streaming = StreamingMapper.toEntity(streamingRequestDTO);
-        Streaming newStreaming = streamingRepository.save(streaming);
-        return StreamingMapper.toResponse(newStreaming);
+    public Streaming save(Streaming newStreaming){
+        return streamingRepository.save(newStreaming);
+
     }
 
-    public List<StreamingResponseDTO> findAll(){
-        return streamingRepository.findAll().stream().map(StreamingMapper::toResponse).toList();
+    public boolean streamingExists(Long id){
+        return streamingRepository.existsById(id);
     }
 
-    public StreamingResponseDTO findById(Long id){
-        Streaming streaming = streamingRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND,"Streaming not found"));
+    public List<Streaming> findAll(){
+        return streamingRepository.findAll();
+    }
 
-        return StreamingMapper.toResponse(streaming);
+    public Optional<Streaming> findById(Long id){
+        return streamingRepository.findById(id);
+    }
+
+    public List<Streaming> findAllById(List<Long> streamingIds){
+        return streamingRepository.findAllById(streamingIds);
     }
 
     public void deleteById(Long id){
-        Streaming streaming = streamingRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND,"Streaming not found"));
-
-        streamingRepository.deleteById(streaming.getId());
+        streamingRepository.deleteById(id);
     }
 }

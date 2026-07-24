@@ -15,11 +15,10 @@ public class StreamingMapper {
     }
 
     public static StreamingResponseDTO toResponse(Streaming streaming){
-        StreamingResponseDTO streamingResponseDTO = new StreamingResponseDTO(
+
+        return new StreamingResponseDTO(
                 streaming.getId(),
                 streaming.getName()
         );
-
-        return streamingResponseDTO;
     }
 }

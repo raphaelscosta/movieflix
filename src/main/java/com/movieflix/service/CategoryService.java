@@ -1,14 +1,13 @@
 package com.movieflix.service;
 
-import com.movieflix.dto.response.CategoryResponseDTO;
 import com.movieflix.entity.Category;
-import com.movieflix.mapper.CategoryMapper;
 import com.movieflix.repository.CategoryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -19,27 +18,25 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public CategoryResponseDTO saveCategory(Category category){
-        Category newCategory = categoryRepository.save(category);
-        return CategoryMapper.toResponse(category);
+    public Category save(Category category){
+        return categoryRepository.save(category);
     }
 
-    public List<CategoryResponseDTO> findAll(){
-        return categoryRepository.findAll().stream().map(CategoryMapper::toResponse).toList();
+    public List<Category> findAll(){
+        return categoryRepository.findAll();
     }
 
-    public CategoryResponseDTO findById(Long id){
-        Category category = categoryRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND,"Category not found"));
+    public List<Category> findAllByCategory(List<Long> categoryId){
+        return categoryRepository.findAllById(categoryId);
+    }
 
-        return CategoryMapper.toResponse(category);
+    public Optional<Category> findById(Long id){
+        return categoryRepository.findById(id);
+
     }
 
     public void deleteById(Long id){
-        Category category = categoryRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND,"Category not found"));
-
-        categoryRepository.deleteById(category.getId());
+        categoryRepository.deleteById(id);
     }
 
 }

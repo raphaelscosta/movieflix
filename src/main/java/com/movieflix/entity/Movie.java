@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="movie")
@@ -51,30 +52,18 @@ public class Movie {
 
     }
 
-    public Movie(Long id, LocalDateTime updatedAt, Double rating, String description, String title, LocalDate releaseDate, LocalDateTime createdAt) {
+    public Movie(Long id, String title, String description, LocalDate releaseDate, Double rating, List<Category> categories, List<Streaming> streamings) {
         this.id = id;
-        this.updatedAt = updatedAt;
-        this.rating = rating;
-        this.description = description;
         this.title = title;
+        this.description = description;
         this.releaseDate = releaseDate;
-        this.createdAt = createdAt;
+        this.rating = rating;
+        this.categories = categories;
+        this.streamings = streamings;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -83,6 +72,14 @@ public class Movie {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDate getReleaseDate() {
@@ -105,15 +102,36 @@ public class Movie {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public List<Streaming> getStreamings() {
+        return streamings;
+    }
+
+    public void setStreamings(List<Streaming> streamings) {
+        this.streamings = streamings;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Movie movie)) return false;
+        return Objects.equals(id, movie.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
