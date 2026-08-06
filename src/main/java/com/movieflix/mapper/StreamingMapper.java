@@ -3,9 +3,9 @@ package com.movieflix.mapper;
 import com.movieflix.dto.request.StreamingRequestDTO;
 import com.movieflix.dto.response.StreamingResponseDTO;
 import com.movieflix.entity.Streaming;
-import lombok.experimental.UtilityClass;
+import org.springframework.stereotype.Component;
 
-@UtilityClass
+@Component
 public class StreamingMapper {
 
     public static Streaming toEntity(StreamingRequestDTO streamingRequestDTO){

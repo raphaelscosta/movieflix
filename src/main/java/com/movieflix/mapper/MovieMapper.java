@@ -7,9 +7,11 @@ import com.movieflix.dto.response.StreamingResponseDTO;
 import com.movieflix.entity.Category;
 import com.movieflix.entity.Movie;
 import com.movieflix.entity.Streaming;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class MovieMapper {
 
     public static Movie toEntity(MovieRequestDTO movieRequestDTO){

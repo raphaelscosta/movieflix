@@ -3,6 +3,8 @@ package com.movieflix.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name="streaming")
 public class Streaming {
@@ -36,5 +38,17 @@ public class Streaming {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Streaming streaming = (Streaming) o;
+        return Objects.equals(id, streaming.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

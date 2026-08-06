@@ -3,7 +3,9 @@ package com.movieflix.mapper;
 import com.movieflix.dto.request.CategoryRequestDTO;
 import com.movieflix.dto.response.CategoryResponseDTO;
 import com.movieflix.entity.Category;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CategoryMapper {
 
     public static Category toEntity(CategoryRequestDTO categoryRequest){
