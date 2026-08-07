@@ -37,13 +37,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponseDTO> register(@RequestBody UserRequestDTO userRequestDTO){
+    public ResponseEntity<UserResponseDTO> register(@Valid @RequestBody UserRequestDTO userRequestDTO){
         User user = userService.register(UserMapper.toEntity(userRequestDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.toResponse(user));
     }
     
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest){
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest){
         try {
             UsernamePasswordAuthenticationToken userAndPass = new UsernamePasswordAuthenticationToken(
                     loginRequest.email(), loginRequest.password());
